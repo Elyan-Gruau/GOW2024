@@ -16,20 +16,36 @@ interface GroundMesh extends BABYLON.Mesh {
 const createScene = function(){
     const scene = new BABYLON.Scene(engine);
     scene.createDefaultCameraOrLight(true, false,true);
-    //const box = new BABYLON.MeshBuilder.CreateBox();
 
     const ground : GroundMesh =  BABYLON.MeshBuilder.CreateGround('ground',{
        height : 10,
        width : 10,
-       subdivisions : 30
-    });
+       subdivisions : 50
+    }, scene);
 
-    ground.material = new BABYLON.StandardMaterial();
+    ground.material = new BABYLON.StandardMaterial('material', scene);
     ground.material.wireframe = true;
 
     const box : BoxMesh = BABYLON.MeshBuilder.CreateBox("myBox", {
-        size : 0.1
+        size : 0.3,
+        faceColors : [
+            new BABYLON.Color4(1, 0, 0, 1),
+            new BABYLON.Color4(1, 1, 0, 1),
+            new BABYLON.Color4(0, 0, 1, 1),
+            new BABYLON.Color4(1, 0, 1, 1)
+        ]
     }, scene);
+
+
+    scene.registerBeforeRender(function() {
+        box.rotation.x += 0.1;
+        //box.rotation.y += 0.05;
+        //box.rotation.z += 0.025;
+
+        box.translate(new BABYLON.Vector3(1, 0, 0), 0.1);
+        //box.position.x += 1 % 10;
+    });
+
     return scene;
 }
 
