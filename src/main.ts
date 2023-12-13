@@ -1,5 +1,6 @@
 import * as BABYLON from '@babylonjs/core';
 import {BoxMesh, GroundMesh} from "./class/classes.ts";
+import {MaterialFactory} from "./materials/MaterialFactory.ts";
 
 
 
@@ -17,11 +18,15 @@ const createScene = function(){
     const ground : GroundMesh =  BABYLON.MeshBuilder.CreateGround('ground',{
        height : 10,
        width : 10,
-       subdivisions : 30
+       subdivisions : 1
     });
 
-    ground.material = new BABYLON.StandardMaterial();
-    ground.material.wireframe = true;
+
+    //ground.material.wireframe = true;
+
+
+
+    ground.material = MaterialFactory.getPavement(scene);
 
     const box : BoxMesh = BABYLON.MeshBuilder.CreateBox("myBox", {
         size : 0.1
