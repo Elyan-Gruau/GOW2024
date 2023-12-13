@@ -39,8 +39,8 @@ const createScene = function(){
 
     scene.registerBeforeRender(function() {
         box.rotation.x += 0.1;
-        //box.rotation.y += 0.05;
-        //box.rotation.z += 0.025;
+        box.rotation.y += 0.05;
+        box.rotation.z += 0.025;
 
         box.translate(new BABYLON.Vector3(1, 0, 0), 0.1);
         //box.position.x += 1 % 10;
