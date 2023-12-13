@@ -1,17 +1,13 @@
 import * as BABYLON from '@babylonjs/core';
+import {BoxMesh, GroundMesh} from "./class/classes.ts";
+
+
 
 const canvas = document.getElementById('renderCanvas');
 
 // @ts-ignore
 const engine = new BABYLON.Engine(canvas);
 
-interface BoxMesh extends BABYLON.Mesh {
-
-}
-
-interface GroundMesh extends BABYLON.Mesh {
-
-}
 
 const createScene = function(){
     const scene = new BABYLON.Scene(engine);
