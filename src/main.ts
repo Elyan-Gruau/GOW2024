@@ -16,21 +16,23 @@ const createScene = function(){
     //const box = new BABYLON.MeshBuilder.CreateBox();
 
     const ground : GroundMesh =  BABYLON.MeshBuilder.CreateGround('ground',{
-       height : 10,
-       width : 10,
+       height : 1,
+       width : 1,
        subdivisions : 1
     });
 
 
-    //ground.material.wireframe = true;
 
 
 
     ground.material = MaterialFactory.getPavement(scene);
 
-    const box : BoxMesh = BABYLON.MeshBuilder.CreateBox("myBox", {
-        size : 0.1
-    }, scene);
+    // ground.material.wireframe = true;
+
+    // const box : BoxMesh = BABYLON.MeshBuilder.CreateBox("myBox", {
+    //     size : 0.1
+    // }, scene);
+    // box.material = MaterialFactory.getPavement(scene);
     return scene;
 }
 
