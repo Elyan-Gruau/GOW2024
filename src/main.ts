@@ -14,11 +14,11 @@ const createScene = function(){
     const scene = new BABYLON.Scene(engine);
     scene.createDefaultCameraOrLight(true, false,true);
 
-    const ground : GroundMesh =  BABYLON.MeshBuilder.CreateGround('',{
-       height : 10,
-       width : 10,
-       subdivisions : 1
-    }, scene);
+    const ground : GroundMesh =  BABYLON.MeshBuilder.CreateGround('ground',{
+        height : 10,
+        width : 10,
+        subdivisions : 1
+    });
 
     ground.material = MaterialFactory.getPavement(scene);
 
@@ -41,7 +41,6 @@ const createScene = function(){
         box.translate(new BABYLON.Vector3(1, 0, 0), 0.05);
         //box.position.x += 1 % 10;
     });
-
     return scene;
 }
 
