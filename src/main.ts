@@ -1,8 +1,8 @@
 import * as BABYLON from '@babylonjs/core';
-import { GroundMesh} from "./class/classes.ts";
+import {GroundMesh} from "./class/classes.ts";
 // import {MaterialFactory} from "./materials/MaterialFactory.ts";
 import {PavementMaterial} from "./materials/PavementMaterial.ts";
-
+import {GOWMatieralTexture} from "./materials/GOWMaterial.ts";
 
 
 const canvas = document.getElementById('renderCanvas');
@@ -21,8 +21,13 @@ const createScene = function(){
        width : 1,
        subdivisions : 1
     });
-    ground.material = new PavementMaterial(scene,10);
+    let groundMaterial : PavementMaterial =  new PavementMaterial(scene,10);
+    // console.log(groundMaterial.doesTextureExist(GOWMatieralTexture.DIFFUSE));
+    // console.log(groundMaterial.doesTextureExist(GOWMatieralTexture.NORMAL));
+
+    ground.material =groundMaterial;
     //MaterialFactory.getPavement(scene);
+
 
 
     //Lamp
