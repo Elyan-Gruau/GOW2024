@@ -27,7 +27,7 @@ const createScene = function(){
 
     //Lamp
     const lampLight = new BABYLON.SpotLight("lampLight", BABYLON.Vector3.Zero(), new BABYLON.Vector3(5, 5, 5), 0.8 * Math.PI, 0.7, scene);
-    lampLight.diffuse = BABYLON.Color3.Yellow();
+    lampLight.diffuse = BABYLON.Color3.White();
     lampLight.intensity = 80;
     // lampLight.parent = scene.getMeshByName("bulb")
 
