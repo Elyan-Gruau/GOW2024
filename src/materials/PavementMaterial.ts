@@ -1,6 +1,6 @@
-import {IWWMaterial} from "./IWWMaterial.ts";
+import {GOWMaterial} from "./GOWMaterial.ts";
 import * as BABYLON from "@babylonjs/core";
-export class PavementMaterial extends IWWMaterial{
+export class PavementMaterial extends GOWMaterial{
 
     constructor(scene :BABYLON.Scene, scale : number ){
         super(scene,"pavement", scale, scale);

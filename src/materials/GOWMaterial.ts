@@ -1,7 +1,7 @@
 import {StandardMaterial} from "@babylonjs/core";
 import * as BABYLON from "@babylonjs/core";
 import {PathHelper} from "../helper/PathHelper.ts";
-export class IWWMaterial extends StandardMaterial{
+export class GOWMaterial extends StandardMaterial{
     scaleX : number;
     scaleY : number;
     textureName : string;
