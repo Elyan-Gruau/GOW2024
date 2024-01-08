@@ -1,5 +1,6 @@
 import * as BABYLON from "@babylonjs/core";
-import {int, StandardMaterial} from "@babylonjs/core";
+import {int} from "@babylonjs/core";
+import {PavementMaterial} from "./PavementMaterial.ts";
 
 
 export class MaterialFactory {

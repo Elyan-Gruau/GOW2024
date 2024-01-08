@@ -1,7 +1,8 @@
 import * as BABYLON from '@babylonjs/core';
-import {BoxMesh, GroundMesh} from "./class/classes.ts";
-import {MaterialFactory} from "./materials/MaterialFactory.ts";
-
+import {GroundMesh} from "./class/classes.ts";
+// import {MaterialFactory} from "./materials/MaterialFactory.ts";
+import {PavementMaterial} from "./materials/PavementMaterial.ts";
+import {GOWMatieralTexture} from "./materials/GOWMaterial.ts";
 
 
 const canvas = document.getElementById('renderCanvas');
@@ -19,6 +20,12 @@ const createScene = function(){
         width : 10,
         subdivisions : 1
     });
+    let groundMaterial : PavementMaterial =  new PavementMaterial(scene,10);
+    // console.log(groundMaterial.doesTextureExist(GOWMatieralTexture.DIFFUSE));
+    // console.log(groundMaterial.doesTextureExist(GOWMatieralTexture.NORMAL));
+
+    ground.material =groundMaterial;
+    //MaterialFactory.getPavement(scene);
 
     ground.material = MaterialFactory.getPavement(scene);
 
@@ -33,13 +40,28 @@ const createScene = function(){
     }, scene);
 
 
-    scene.registerBeforeRender(function() {
-        box.rotation.x += 0.1;
-        box.rotation.y += 0.05;
-        box.rotation.z += 0.025;
 
-        box.translate(new BABYLON.Vector3(1, 0, 0), 0.05);
-        //box.position.x += 1 % 10;
+    // const box : BoxMesh = BABYLON.MeshBuilder.CreateBox("myBox", {
+    //     size : 0.1
+    // }, scene);
+    // box.material = MaterialFactory.getPavement(scene);
+
+    //Skybox
+    const skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:150}, scene);
+    const skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("textures/skybox", scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+    skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+    skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    skybox.material = skyboxMaterial;
+
+    // BABYLON.SceneLoader.ImportMeshAsync("", "https://assets.babylonjs.com/meshes/", "valleyvillage.glb").then(() => {
+    //     scene.getMeshByName("ground").material.maxSimultaneousLights = 5;
+    // });
+
+    scene.registerBeforeRender(function() {
+
     });
     return scene;
 }
