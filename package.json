@@ -6,11 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "predeploy" : "tsc && vite build",
+    "deploy" : "gh-pages -d build",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@babylonjs/core": "^6.32.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "gh-pages": "^6.1.1"
   }
 }
