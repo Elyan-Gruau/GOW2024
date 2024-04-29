@@ -5,7 +5,10 @@ import {PavementMaterial} from "./materials/PavementMaterial.ts";
 import {Vector3} from "@babylonjs/core";
 import {Player} from "./class/Player.ts";
 import {GOWSkybox} from "./class/GOWSkybox.ts";
-import {Sun} from "./class/Sun.ts";
+import {RunnerSun} from "./class/RunnerSun.ts";
+import WorldChunk from "./class/world/WorldChunk.ts";
+import RunnerEngine from "./engine/RunnerEngine.ts";
+import WorldMap from "./class/world/WorldMap.ts";
 // import {GOWMatieralTexture} from "./materials/GOWMaterial.ts";
 
 
@@ -18,24 +21,24 @@ let ground: GroundMesh;
 
 const createScene = function(){
     const scene = new BABYLON.Scene(engine);
-    scene.createDefaultCameraOrLight(true, false,true);
+    // scene.createDefaultCameraOrLight(true, false,true);
+
+    RunnerEngine.init(scene,1);
+
+    const worldMap : WorldMap = new WorldMap(scene,20);
+
     //const box = new BABYLON.MeshBuilder.CreateBox();
 
-     ground =  BABYLON.MeshBuilder.CreateGround('ground',{
-       height : 1,
-       width : 1,
-       subdivisions : 1
-    });
-    let groundMaterial : PavementMaterial =  new PavementMaterial(scene,10);
-    // console.log(groundMaterial.doesTextureExist(GOWMatieralTexture.DIFFUSE));
-    // console.log(groundMaterial.doesTextureExist(GOWMatieralTexture.NORMAL));
 
-    ground.material =groundMaterial;
     //MaterialFactory.getPavement(scene);
 
-    const player :Player = new Player(scene);
+    // const player :Player = new Player(scene,camera);
 
-    const sun :Sun = new Sun(scene);
+
+    const sun :RunnerSun = new RunnerSun(scene);
+
+    // const chunk = new WorldChunk(scene);
+    // const c = new WorldChunk(scene,new Vector3(0,0,1));
 
 
     //Skybox
@@ -53,10 +56,12 @@ const createScene = function(){
         const deltaTime = (currentTime - lastTime) / 1000; // Convertir en secondes
 
         // Mettez à jour le joueur avec le delta time
-        player.update(deltaTime);
+        // player.update(deltaTime);
+        RunnerEngine.updatePlayers(deltaTime);
+        worldMap.update(deltaTime);
 
         // Mettez à jour le soleil avec le delta time
-        sun.update(deltaTime);
+        // sun.update(deltaTime);
 
         lastTime = currentTime;
     });

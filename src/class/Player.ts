@@ -1,33 +1,43 @@
 // Player.ts
 import * as BABYLON from '@babylonjs/core';
-import {Vector3} from "@babylonjs/core";
+import {Camera, Nullable, Vector3} from "@babylonjs/core";
 import {InputController} from "./InputController.ts";
+import PlayerEffect from "./PlayerEffect.ts";
 
 
 export class Player {
-    private mesh: BABYLON.Mesh;
+    mesh: BABYLON.Mesh;
     private effects: PlayerEffect;
     private waterLevel = 100; //MAX 100
     private inputController: InputController;
     private baseVelocity : number;
     private baseDodgeVelocity : number;
+    private camera: Camera;
     // private
 
-    constructor(scene: BABYLON.Scene) {
+    constructor(scene: BABYLON.Scene,camera: BABYLON.Camera) {
         // this.mesh = BABYLON.MeshBuilder.CreateBox('playerBox', { size: 0.1}, scene);
         this.mesh = BABYLON.MeshBuilder.CreatePlane('playerBox',
             {
                 size: 0.1,
 
+
             }, scene);
-        const angle = Math.PI / 4; // Angle d'inclinaison en radians
+        this.camera = camera;
+        this.camera.parent = this.mesh;
+        this.camera.maxZ = 50;
+        this.camera.minZ = 0;
+        // this.mesh.renderingGroupId = 2;
+        this.mesh.position = new Vector3(0,0.04,0) // Y hauteur
+        const angle = Math.PI / 11; // Angle d'inclinaison en radians
         this.inputController = new InputController(scene);
-        this.baseVelocity = 0.05;
+        this.baseVelocity = 0.5;
         this.baseDodgeVelocity = 0.5;
         this.mesh.rotate(BABYLON.Axis.X, angle, BABYLON.Space.LOCAL);
 
-        const positionGizmo = new BABYLON.PositionGizmo();
-        positionGizmo.attachedMesh = this.mesh;
+
+        // const positionGizmo = new BABYLON.PositionGizmo();
+        // positionGizmo.attachedMesh = this.mesh;
 
         // Ajoutez ici la logique pour positionner le joueur, ajouter des animations, etc.
     }
@@ -55,5 +65,12 @@ export class Player {
 
     }
 
+    public setParent(parent:Node){
+        // @ts-ignore
+        this.mesh.parent = parent;
+    }
 
+    getZ() {
+        return this.mesh.position.z;
+    }
 }

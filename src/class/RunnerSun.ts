@@ -1,9 +1,9 @@
 import {MeshBuilder, Scene} from "@babylonjs/core";
 import * as BABYLON from "@babylonjs/core";
 
-export class Sun {
+export class RunnerSun {
 
-    private lampLight: BABYLON.SpotLight;
+    private lampLight: BABYLON.Light;
     private sunBall ;
     private color: BABYLON.Color3;
     private intensity: number;
@@ -13,16 +13,16 @@ export class Sun {
     constructor(scene: Scene) {
         // Lamp
         const position: BABYLON.Vector3 = new BABYLON.Vector3(0, 1, 0);
-        const direction : BABYLON.Vector3 = new BABYLON.Vector3(0, -1, 0);
+        const direction : BABYLON.Vector3 = new BABYLON.Vector3(-10.2, -10, 10);
 
         this.sunBall = MeshBuilder.CreateSphere('sun', {
             diameter: 0.1,
           }, scene);
         this.sunBall.position = position;
 
-        this.lampLight = new BABYLON.SpotLight("lampLight", position,direction, Math.PI / 2, 2, scene);
-        this.color = new BABYLON.Color3(1, 0, 0); // Couleur de départ (blanc)
-        this.intensity = 80; // Intensité de départ
+        this.lampLight = new BABYLON.DirectionalLight("lampLight",direction, scene);
+        this.color = new BABYLON.Color3(255, 255,250); // Couleur de départ (blanc)
+        this.intensity = 0.1; // Intensité de départ
         this.maxIntesity = this.intensity;
 
         this.lampLight.diffuse = this.color;
