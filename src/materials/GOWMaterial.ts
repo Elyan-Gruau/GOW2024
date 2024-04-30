@@ -11,16 +11,16 @@ export class GOWMaterial extends StandardMaterial{
     normalPath : string;
     ambiantPath : string;
 
-    constructor(scene : BABYLON.Scene,textureName : string, scaleX : number, scaleY : number) {
+    constructor(scene : BABYLON.Scene,basePath:GOWMaterialPath,textureName : string, scaleX : number, scaleY : number,texVariant:string = "") {
         super(textureName,scene);
         this.scaleX = scaleX;
         this.scaleY = scaleY
         this.textureName = textureName;
 
-        this.mainPath = PathHelper.texturePath +"/"+textureName+"/";
-        this.diffusePath = this.mainPath+textureName+"_diffuse.png";
-        this.normalPath =  this.mainPath+textureName+"_normal.png";
-        this.ambiantPath =  this.mainPath+textureName+"_ambiant.png";
+        this.mainPath = PathHelper.texturePath +"/"+basePath+"/";
+        this.diffusePath = this.mainPath+textureName+texVariant+"_diffuse.png";
+        this.normalPath =  this.mainPath+textureName+texVariant+"_normal.png";
+        this.ambiantPath =  this.mainPath+textureName+texVariant+"_ambiant.png";
     }
 
     // DONT WORK,
@@ -66,4 +66,10 @@ export enum GOWMatieralTexture{
     DIFFUSE = "diffuse",
     NORMAL = "normal",
     AMBIANT = "ambiant"
+}
+export enum GOWMaterialPath{
+    ENTITY = "entity",
+    GLOBAL = "global",
+    BUILDING = "building",
+    BOOSTER = "booster"
 }

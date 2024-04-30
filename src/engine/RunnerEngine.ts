@@ -7,7 +7,7 @@ export default class RunnerEngine {
 
     static init(scene: Scene,playerQTY:number = 2){
         for (let i = 0; i < playerQTY; i++){
-            const camera = new BABYLON.UniversalCamera("playerCamera_"+i, new BABYLON.Vector3(0, 0.25, -1), scene);
+            const camera = new BABYLON.UniversalCamera("playerCamera_"+i, new BABYLON.Vector3(0, 0.20, -1), scene);
             scene.addCamera(camera);
             RunnerEngine.players.push(new Player(scene,camera))
         }

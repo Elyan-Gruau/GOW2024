@@ -1,6 +1,6 @@
+/* tslint:disable:no-unused-variable */
 import WorldChunk from "./WorldChunk.ts";
 import {Scene, Vector3} from "@babylonjs/core";
-import {Player} from "../Player.ts";
 import RunnerEngine from "../../engine/RunnerEngine.ts";
 
 export default class WorldMap{
@@ -18,9 +18,9 @@ export default class WorldMap{
     }
 
 
-    update(deltaTime : number){
+    update(deltaTime : number ){
         // console.log(deltaTime)
-        this.chunks.forEach((chunk,index) =>{
+        this.chunks.forEach((chunk) =>{
             // console.log(RunnerEngine.getPlayer(0).getZ())
             if (chunk.getZ()+WorldMap.HIDDING_OFFSET<RunnerEngine.getPlayer(0).getZ()){
                 //remove passed chunk

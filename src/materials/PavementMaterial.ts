@@ -1,9 +1,10 @@
-import {GOWMaterial} from "./GOWMaterial.ts";
+import {GOWMaterial, GOWMaterialPath} from "./GOWMaterial.ts";
 import * as BABYLON from "@babylonjs/core";
+
 export class PavementMaterial extends GOWMaterial{
 
     constructor(scene :BABYLON.Scene, scale : number ){
-        super(scene,"pavement", scale, scale);
+        super(scene,GOWMaterialPath.GLOBAL,"pavement", scale, scale,"/pavement");
 
         const samplingMode : number = BABYLON.Texture.CUBIC_MODE;
         const specularPower : number = 1000;
@@ -11,6 +12,7 @@ export class PavementMaterial extends GOWMaterial{
         const useParallax = true;
         const useParallaxOcclusion = true;
 
+        console.log(this.diffusePath)
         const diffuse: BABYLON.Texture    =  new BABYLON.Texture(this.diffusePath, scene,
             false,false,samplingMode );
         this.diffuseTexture =  diffuse;

@@ -25,15 +25,16 @@ export class Player {
             }, scene);
         this.camera = camera;
         this.camera.parent = this.mesh;
-        this.camera.maxZ = 50;
-        this.camera.minZ = 0;
+        this.camera.maxZ = 100;
+        this.camera.minZ = 0.01;
         // this.mesh.renderingGroupId = 2;
         this.mesh.position = new Vector3(0,0.04,0) // Y hauteur
-        const angle = Math.PI / 11; // Angle d'inclinaison en radians
+        const angle = Math.PI / 45 ; // Angle d'inclinaison en radians
         this.inputController = new InputController(scene);
         this.baseVelocity = 0.5;
         this.baseDodgeVelocity = 0.5;
         this.mesh.rotate(BABYLON.Axis.X, angle, BABYLON.Space.LOCAL);
+        // this.mesh.receiveShadows =true;
 
 
         // const positionGizmo = new BABYLON.PositionGizmo();

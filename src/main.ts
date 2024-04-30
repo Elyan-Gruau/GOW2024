@@ -1,14 +1,9 @@
 import * as BABYLON from '@babylonjs/core';
-import {GroundMesh} from "./class/classes.ts";
-// import {MaterialFactory} from "./materials/MaterialFactory.ts";
-import {PavementMaterial} from "./materials/PavementMaterial.ts";
-import {Vector3} from "@babylonjs/core";
-import {Player} from "./class/Player.ts";
-import {GOWSkybox} from "./class/GOWSkybox.ts";
 import {RunnerSun} from "./class/RunnerSun.ts";
-import WorldChunk from "./class/world/WorldChunk.ts";
 import RunnerEngine from "./engine/RunnerEngine.ts";
 import WorldMap from "./class/world/WorldMap.ts";
+import {GOWSkybox} from "./class/GOWSkybox.ts";
+import {PavementMaterial} from "./materials/PavementMaterial.ts";
 // import {GOWMatieralTexture} from "./materials/GOWMaterial.ts";
 
 
@@ -16,33 +11,42 @@ const canvas = document.getElementById('renderCanvas');
 
 // @ts-ignore
 const engine = new BABYLON.Engine(canvas);
-let ground: GroundMesh;
+
 
 
 const createScene = function(){
     const scene = new BABYLON.Scene(engine);
+    scene.fogStart = 0.1;
+    scene.fogDensity = 100;
+    scene.fogEnd = 100;
+    scene.fogEnabled = true;
     // scene.createDefaultCameraOrLight(true, false,true);
 
     RunnerEngine.init(scene,1);
-
     const worldMap : WorldMap = new WorldMap(scene,20);
 
-    //const box = new BABYLON.MeshBuilder.CreateBox();
+
+
+    // const sphere = BABYLON.MeshBuilder.CreateSphere("sphereTest",
+    //     {diameter:1},scene);
+    // sphere.material = new PavementMaterial(scene,10);
 
 
     //MaterialFactory.getPavement(scene);
 
     // const player :Player = new Player(scene,camera);
 
+    //Creation of the sun
+     const sun : RunnerSun = new RunnerSun(scene);
 
-    const sun :RunnerSun = new RunnerSun(scene);
+    //Skybox
+    new GOWSkybox(scene);
 
     // const chunk = new WorldChunk(scene);
     // const c = new WorldChunk(scene,new Vector3(0,0,1));
 
 
-    //Skybox
-    // const skybox : GOWSkybox = new GOWSkybox(scene);
+
 
 
     // BABYLON.SceneLoader.ImportMeshAsync("", "https://assets.babylonjs.com/meshes/", "valleyvillage.glb").then(() => {
@@ -60,7 +64,7 @@ const createScene = function(){
         RunnerEngine.updatePlayers(deltaTime);
         worldMap.update(deltaTime);
 
-        // Mettez à jour le soleil avec le delta time
+
         // sun.update(deltaTime);
 
         lastTime = currentTime;
