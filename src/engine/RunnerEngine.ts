@@ -1,4 +1,4 @@
-import {Player} from "../class/Player.ts";
+import {Player} from "../class/player/Player.ts";
 import {Scene} from "@babylonjs/core";
 import * as BABYLON from "@babylonjs/core";
 

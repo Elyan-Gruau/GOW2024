@@ -1,8 +1,8 @@
 // Player.ts
 import * as BABYLON from '@babylonjs/core';
 import {Camera, Nullable, Vector3} from "@babylonjs/core";
-import {InputController} from "./InputController.ts";
-import PlayerEffect from "./PlayerEffect.ts";
+import {InputController} from "../InputController.ts";
+import PlayerEffect from "../PlayerEffect.ts";
 
 
 export class Player {
@@ -13,6 +13,9 @@ export class Player {
     private baseVelocity : number;
     private baseDodgeVelocity : number;
     private camera: Camera;
+
+
+    private spamBoost : number;
     // private
 
     constructor(scene: BABYLON.Scene,camera: BABYLON.Camera) {
@@ -32,7 +35,7 @@ export class Player {
         const angle = Math.PI / 45 ; // Angle d'inclinaison en radians
         this.inputController = new InputController(scene);
         this.baseVelocity = 0.5;
-        this.baseDodgeVelocity = 0.5;
+        this.baseDodgeVelocity = 0.7;
         this.mesh.rotate(BABYLON.Axis.X, angle, BABYLON.Space.LOCAL);
         // this.mesh.receiveShadows =true;
 
@@ -44,21 +47,35 @@ export class Player {
     }
 
     public update(dt : number): void {
-        // Ajoutez ici la logique de mise à jour du joueur à chaque frame
+
+        let spamBoostVelocity = 0.0;
+
+
         const position : BABYLON.Vector3 = this.mesh.position;
 
-        let positionZ = position.z+this.baseVelocity*dt;
+
+
+
+
+        //Spam Boost
+        if (this.inputController.isKeyDown("z")){
+            console.log("spamBoost")
+            spamBoostVelocity+=5;
+        }
+        let positionZ = position.z+(this.baseVelocity + spamBoostVelocity)*dt;
         let positionX = position.x;
 
-        if (this.inputController.isKeyDown(" ")){
-            console.log("jump")
-        }
         if (this.inputController.isKeyDown("q")){
-            positionX -= this.baseDodgeVelocity * dt;
+            positionX -= (this.baseDodgeVelocity) * dt;
+        }
+        if(this.inputController.isKeyDown("s")){
+            console.log("jump")
         }
         if (this.inputController.isKeyDown("d")){
             positionX +=  this.baseDodgeVelocity * dt;
         }
+
+
 
 
         this.mesh.position = new Vector3(positionX, position.y,positionZ);
