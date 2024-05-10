@@ -7,7 +7,7 @@ export default class WorldChunk{
     private ground:Mesh;
     private buildings : WorldBuilding[];
     private index;
-    constructor(scene : Scene, position:Vector3 = new Vector3(0,0,0),index:number) {
+    constructor(scene : Scene, position:Vector3 = new Vector3(0,0,0),index:number,leftBuildType:number=1,rightBuildType:number=1) {
         this.index = index;
         this.buildings = [];
         this.ground =  BABYLON.MeshBuilder.CreateGround('ground',{
@@ -24,9 +24,21 @@ export default class WorldChunk{
         this.ground.material =groundMaterial;
 
 
-        //TEST BUILDING
-        const bLeft = new WorldBuilding(scene, new Vector3(position.x+1, position.y,position.z),WorldChunk.multiplyWithRandomFactor(0.4,0.25),true);
-        const bRight = new WorldBuilding(scene, new Vector3(position.x+1, position.y,position.z),WorldChunk.multiplyWithRandomFactor(0.4,0.25),false);
+        // BUILDINGS
+        this.buildings.push(new WorldBuilding(
+            scene,
+            new Vector3(position.x+1, position.y,position.z),
+            WorldChunk.multiplyWithRandomFactor(1,0.25),
+            leftBuildType,
+            true));
+        this.buildings.push(  new WorldBuilding(
+            scene,
+            new Vector3(position.x+1, position.y,position.z),
+            WorldChunk.multiplyWithRandomFactor(1,0.25),
+            rightBuildType,
+            false));
+
+        // @ts-ignore
     }
 
     getZ() {
@@ -34,8 +46,12 @@ export default class WorldChunk{
     }
 
     remove() {
-        console.log("remove");
+        // console.log("remove");
         this.ground.dispose();
+        for(let i = 0 ; i < this.buildings.length ; i++) {
+            this.buildings[i].dispose();
+        }
+
     }
 
 

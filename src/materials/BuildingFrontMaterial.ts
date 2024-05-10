@@ -10,7 +10,7 @@ export default class BuildingFrontMaterial extends  GOWMaterial {
         // this.mainPath = PathHelper.texturePath +"/map/building/building_2/";
 
 
-        const samplingMode : number = BABYLON.Texture.CUBIC_MODE;
+        const samplingMode : number = BABYLON.Texture.NEAREST_NEAREST;
         const diffuse: BABYLON.Texture    =  new BABYLON.Texture(this.diffusePath, scene,
             false,false,samplingMode );
         this.diffuseTexture =  diffuse;
@@ -18,6 +18,9 @@ export default class BuildingFrontMaterial extends  GOWMaterial {
         this.diffuseTexture.uScale = scale;
         // @ts-ignore
         this.diffuseTexture.vScale = scale;
+        this.diffuseTexture.hasAlpha = true;
+
+        // this.diffuseTexture.
         console.log(this.diffusePath)//s
     }
 }

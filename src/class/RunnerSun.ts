@@ -25,7 +25,7 @@ export class RunnerSun {
 
 
         //Ambiant light
-        this.ambiantLight = new BABYLON.DirectionalLight("ambiantLightSun",new Vector3(0.1,-1,0.0),scene);
+        this.ambiantLight = new BABYLON.DirectionalLight("ambiantLightSun",new Vector3(0.1,-1,0.1),scene);
         this.ambiantLight.diffuse =new Color3(125,125,125);
         this.ambiantLight.intensity = 0.31;
 
